@@ -21,7 +21,8 @@ namespace {
 template <typename T>
 class Random {
 	static std::uniform_int_distribution<T> lin_dist;
-	static std::binomial_distribution<T> gauss_dist;
+	static std::binomial_distribution<long> gauss_dist;
+	static constexpr long gauss_precision = 100;
 
 public:
 
@@ -42,13 +43,13 @@ public:
 	
 	/// @return random value between a and b with linear distribution
 	static inline T get_rand_gauss(T a, T b) {
-		return gauss_dist(rand_num_gen) * float(b - a) + a;
+		return gauss_dist(rand_num_gen) * double(b - a) / double(gauss_precision) + a;
 	}
 };
 
 template <typename T>
 std::uniform_int_distribution<T> Random<T>::lin_dist;
 template <typename T>
-std::binomial_distribution<T> Random<T>::gauss_dist {T(100), 0.5};
+std::binomial_distribution<long> Random<T>::gauss_dist {T(gauss_precision), 0.5};
 
 #endif /* defined(__double_sim__rand__) */
