@@ -73,6 +73,7 @@ public:
 	Time age(const Time time) const noexcept {return time - _birth_date;}
 	// birth
 	bool can_give_birth(const Time time) const noexcept;
+	void mark_as_gave_last_birth(const Time time) {_last_gave_birth_date = time;}
 	// health
 	signed health() const noexcept {return _health;}
 	// strangeness
