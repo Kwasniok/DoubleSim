@@ -54,7 +54,6 @@ private:
 	
 public:
 	
-	Person() noexcept { }
 	Person(const Sex sex, const Time birth_date, const signed strangeness) noexcept
 		: _id(++id_counter), _sex(sex), _birth_date(birth_date), _strangeness(strangeness) { }
 	Person(const Sex sex, const Time birth_date, const signed strangeness, signed health) noexcept
@@ -111,13 +110,15 @@ public:
 	static Sex rand_sex()
 		{return to_sex(death_age_dist(rand_num_gen) % (to_number(Sex::last) +1));}
 	
-	/// creates a new person from a given coulpe
 	/// a coulpe must match the following conditions to be able to give birth:
 	///		(i)  the sexes must complement each other
 	///		(ii) both must be able to give birth
-	/// @return true iff birth was successfull
+	/// @return true iff couple can give birth
+	static bool can_give_birth(const Person& parent1, const Person& parent2, const Time time);
+	/// creates a new person from a given coulpe regardless if iit can give birth
+	/// (check can_give_birth for couple before)
 	/// @see complement, can_give_birth
-	static bool birth_from_couple(Person& child, Person& parent1, Person& parent2, const Time time);
+	static Person forced_birth_from_couple(Person& parent1, Person& parent2, const Time time);
 	
 	// io
 	friend std::ostream& operator<<(std::ostream& os, const Person& p);

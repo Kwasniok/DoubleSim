@@ -37,9 +37,8 @@ void Settlement::tick_birth(const Time time) {
 		Person& p1 = persons[i];
 		i = Random<unsigned long>::get_rand_lin(persons.size());
 		Person& p2 = persons[i];
-		Person mp;
-		if (Person::birth_from_couple(mp, p1, p2, time)) {
-			persons.push_back(std::move(mp));
+		if (Person::can_give_birth(p1, p2, time)) {
+			persons.push_back(Person::forced_birth_from_couple(p1, p2, time));
 			++living_persons;
 			++total_living_persons;
 		}

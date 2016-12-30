@@ -11,7 +11,7 @@
 
 using namespace std;
 
-unsigned Person::id_counter = 0;
+unsigned Person::id_counter = 1;
 /// death is more common when a person gets old
 binomial_distribution<Time> Person::death_age_dist {Person::max_age, 0.8};
 /// giving bith is more common for younger people
@@ -52,32 +52,27 @@ bool Person::can_give_birth(const signed time) const noexcept {
 	}
 }
 
-bool Person::birth_from_couple(Person& c, Person& p1, Person& p2, const signed time)
-{
-	
+bool Person::can_give_birth(const Person& p1, const Person& p2, const Time time) {
 	// conditions for sucessfull birth:
 	// 1. sexes complement each other
 	// 2. both can give birth
-	
-	if (complement(p1.sex(), p2.sex()) && p1.can_give_birth(time) && p2.can_give_birth(time))
-	{
-		p1._last_gave_birth_date = time;
-		p2._last_gave_birth_date = time;
+	return complement(p1.sex(), p2.sex()) && p1.can_give_birth(time) && p2.can_give_birth(time);
+}
 
-		Sex sx = Person::rand_sex();
+Person Person::forced_birth_from_couple(Person& p1, Person& p2, const signed time)
+{
+	p1._last_gave_birth_date = time;
+	p2._last_gave_birth_date = time;
 
-		signed sn;
-		if (Random<bool>::get_rand_lin())
-			sn = p1._strangeness;
-		else
-			sn = p2._strangeness;
+	Sex sx = Person::rand_sex();
 
-		c = Person{sx, time, sn};
-		return true;
-	}
-	
-	// birth conditions not met
-	return false;
+	signed sn;
+	if (Random<bool>::get_rand_lin())
+		sn = p1._strangeness;
+	else
+		sn = p2._strangeness;
+
+	return {sx, time, sn};
 }
 
 ostream& operator<<(ostream& os, const Person& p) {
