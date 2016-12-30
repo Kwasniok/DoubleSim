@@ -47,6 +47,16 @@ public:
 	}
 };
 
+class Chance {
+	
+public:
+	
+	static inline bool one_per(unsigned c) {
+		return Random<unsigned>::get_rand_lin(c) == 0;
+	}
+	
+};
+
 template <typename T>
 std::uniform_int_distribution<T> Random<T>::lin_dist;
 template <typename T>
