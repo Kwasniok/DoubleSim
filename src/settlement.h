@@ -29,7 +29,7 @@ private:
 	/// amount of all persons lived in a stettlement
 	unsigned total_living_persons = 0;
 	/// ground type a settlement is bild upon
-	Ground_Type ground = Ground_Type::dfault;
+	Ground ground = Ground::DEFAULT;
 	/// amount of food resoures (1 unit := resources for 1 person to live)
 	unsigned food_resources = 0;
 
@@ -44,8 +44,8 @@ public:
 	unsigned get_persons_total() const noexcept {return total_living_persons;}
 	
 	// ground
-	Ground_Type get_ground() const noexcept {return ground;}
-	void set_ground(Ground_Type g) noexcept {ground = g;}
+	Ground get_ground() const noexcept {return ground;}
+	void set_ground(Ground g) noexcept {ground = g;}
 	
 	// resurces
 	void set_food_resources(unsigned res) noexcept {food_resources = res;}
@@ -82,7 +82,7 @@ public:
 	static constexpr double max_local_birth_fac = 2.00; // twice as normal
 	/// @return birth factor for a settlement claped to min/max values
 	/// @see min_local_birth_fac, max_local_birth_fac
-	double get_local_birth_fac() const noexcept;
+	double local_birth_fac() const noexcept;
 
 	// local death factor
 	static constexpr double min_local_death_fac = 0.25; // less deaths

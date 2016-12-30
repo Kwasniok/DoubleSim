@@ -86,26 +86,15 @@ void Settlement::tick(const Time time) {
 	total_living_persons += b;
 }
 
-double Settlement::get_local_birth_fac() const noexcept {
+double Settlement::local_birth_fac() const noexcept {
+	
 	double lbf;
-
-	if (living_persons != 0)
-		lbf = static_cast<double>(food_resources) / static_cast<double>(living_persons);
-	else
-		lbf = static_cast<double>(food_resources);
+	if (living_persons != 0) {
+		lbf = double(food_resources) / double(living_persons);
+	} else {
+		lbf = double(food_resources);
+	}
+	lbf *= ground.habitability_fac();
 
 	return clamp(lbf, min_local_birth_fac, max_local_birth_fac);
 }
-
-/*
- double Settlement::get_local_death_fac() const noexcept {
-	double ldf;
- 
-	if (food_resources != 0)
- ldf = static_cast<double>(living_persons) / static_cast<double>(food_resources);
-	else
- ldf = static_cast<double>(living_persons);
- 
-	return clamp(ldf, min_local_death_fac, max_local_death_fac);
- }
- */
