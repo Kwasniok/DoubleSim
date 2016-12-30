@@ -73,7 +73,7 @@ public:
 	bool departs(Person& p);
 
 	/// simulate one step in time (i.e. a year)
-	void tick(const unsigned time);
+	void tick(const Time time);
 
 	/// global birth factor used to controll birth rate
 	/// #births tried per year = #males & females who can give birth / (birth_fac * local_birth_fac)

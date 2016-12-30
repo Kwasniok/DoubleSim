@@ -62,7 +62,7 @@ unsigned birth(std::vector<Person>& ps, const signed time, double bf) {
 	return total_births;
 }
 
-void Settlement::tick(const unsigned time) {
+void Settlement::tick(const Time time) {
 	unsigned food_res = food_resources;
 
 	for (auto& p : persons) {

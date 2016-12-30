@@ -12,7 +12,7 @@
 #include <iostream>
 
 #include "rand.h"
-#include "time_t.h"
+#include "units.h"
 #include "sex.h"
 
 class Person {
@@ -88,15 +88,15 @@ public:
 	
 
 	/// maximum age for an average person
-	static constexpr Time max_age = 120;
+	static constexpr Time max_age = 120 * years;
 	/// minimal age for a person to give birth
-	static constexpr Time min_birth_age = 20;
+	static constexpr Time min_birth_age = 20 * years;
 	/// minimal time between for a person between to births
-	static constexpr Time min_rebirth_span = 4;
+	static constexpr Time min_rebirth_span = 1 * years;
 	/// maximal health for a person
-	static constexpr signed   max_health = 100;
+	static constexpr signed max_health = 100;
 	/// minimal age for a person
-	static constexpr signed   min_health = 0;
+	static constexpr signed min_health = 0;
 
 	/// @return a random age when an average person could die
 	static Time rand_death_age()
