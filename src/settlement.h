@@ -75,11 +75,13 @@ public:
 	/// simulate one step in time (i.e. a year)
 	void tick(const Time time);
 
-	/// global birth factor used to controll birth rate
-	/// #births tried per year = #males & females who can give birth / (birth_fac * local_birth_fac)
-	static constexpr double birth_fac = 2.0 / 10.0; /// (empirical value)
-	static constexpr double min_local_birth_fac = 0.00; // no birth
-	static constexpr double max_local_birth_fac = 2.00; // twice as normal
+private:
+	void tick_remove_dead(const Time time);
+	void tick_birth(const Time time);
+	
+public:
+	static constexpr double min_local_birth_fac = 0.00;
+	static constexpr double max_local_birth_fac = 2.00;
 	/// @return birth factor for a settlement claped to min/max values
 	/// @see min_local_birth_fac, max_local_birth_fac
 	double local_birth_fac() const noexcept;
