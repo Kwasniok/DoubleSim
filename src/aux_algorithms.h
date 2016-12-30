@@ -26,6 +26,13 @@ bool inline remove(std::vector<T>& c, T& e) {
 	return false;
 }
 
+/// returns true if at least one element in container c has value val
+template <typename C, typename T>
+bool inline has(const C& c, const T& val) {
+	auto it = std::find(c.begin(), c.end(), val);
+	return it != c.end();
+}
+
 /// clamp a value such that min <= clamp(v) <= max
 template <typename  T>
 T inline clamp(T v, T min, T max) {
